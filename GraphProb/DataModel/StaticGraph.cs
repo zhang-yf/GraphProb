@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace GraphProb.DataModel
 {
+    /// <summary>
+    /// First line is the number of vertecies.
+    /// Followed by 2 lines for each vertex in increment ids (implied).
+    /// First line has  Color, number of childrens (not in use)
+    /// Second line has an array of childrens by their ids.
+    /// </summary>
     public static class StaticGraph
     {
         public const string Graph = @"
