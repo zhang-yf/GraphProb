@@ -37,7 +37,7 @@ namespace GraphProb.DataModel
         /// </summary>
         /// <param name="readFromFile"> default false, will read from embeded graph</param>
         /// <param name="textFile"> this is ignored if readFromFile is set to false</param>
-        public Graph(bool readFromFile = false,string textFile = "C:\\Users\\yifengz\\sources\\repos\\GraphProb\\GraphProb\\Graph.txt") {
+        public Graph(bool readFromFile = false,string textFile = "Graph.txt") {
             this.Triangles = new Dictionary<string, Triangle>();
             this.DynamicNodes = new List<Node>();
             this.LinkedNodes = new List<LinkedNode>();
@@ -71,7 +71,7 @@ namespace GraphProb.DataModel
         /// Recursive DFS, traverse the graph using basic DFS. any sub tree is pruned 
         /// when the acumulative complete triangle is more than 3.
         /// 
-        /// However, since this is a undirected graph with cycles, DFS performance is very bad (depends on the average degree of nodes and n, bounded by (d^n)^3).
+        /// However, since this is a undirected graph with cycles, DFS performance is very bad (depends on the average degree d of nodes and n, bounded by (d^n)^3).
         /// </summary>
         /// <param name="n"> the Root Node</param>
         /// <param name="sum"> The acumulative sum at each internal tree node, usded for pruning.</param>
@@ -123,6 +123,8 @@ namespace GraphProb.DataModel
         /// rather the result is calculated at each state change. A lot cheaper this way.
         /// 
         /// 
+        /// 
+        /// bounded by 3^n
         /// </summary>
         /// <returns></returns>
         /// 
@@ -151,14 +153,14 @@ namespace GraphProb.DataModel
             while (sumOfColors < maximumSumOfColors)
             {
 
-
+                // increment the lowest position of node's color.
                 LinkedNode node = this.LinkedNodes.First();
                 int prevSum = sumOfColors;
 
                 int localNumOfTriangle = node.getSum();
                 sumOfColors += this.IncrementColor(node);
                 numOfCompleteTriangle += (node.getSum() - localNumOfTriangle);
-
+                // similar to long addition, the increment carry over to next position.
                 while (prevSum > sumOfColors)
                 {
 
