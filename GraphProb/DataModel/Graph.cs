@@ -37,7 +37,7 @@ namespace GraphProb.DataModel
         /// </summary>
         /// <param name="readFromFile"> default false, will read from embeded graph</param>
         /// <param name="textFile"> this is ignored if readFromFile is set to false</param>
-        public Graph(bool readFromFile = true,string textFile = "C:\\Users\\yifengz\\source\\repos\\GraphProb\\GraphProb\\Graph.txt") {
+        public Graph(bool readFromFile = false,string textFile = "C:\\Users\\yifengz\\sources\\repos\\GraphProb\\GraphProb\\Graph.txt") {
             this.Triangles = new Dictionary<string, Triangle>();
             this.DynamicNodes = new List<Node>();
             this.LinkedNodes = new List<LinkedNode>();
