@@ -71,7 +71,7 @@ namespace GraphProb.DataModel
         /// Recursive DFS, traverse the graph using basic DFS. any sub tree is pruned 
         /// when the acumulative complete triangle is more than 3.
         /// 
-        /// However, since this is a undirected graph with cycles, DFS performance is very bad (depends on the average degree of nodes and n, bounded by d^).
+        /// However, since this is a undirected graph with cycles, DFS performance is very bad (depends on the average degree of nodes and n, bounded by (d^n)^3).
         /// </summary>
         /// <param name="n"> the Root Node</param>
         /// <param name="sum"> The acumulative sum at each internal tree node, usded for pruning.</param>
@@ -93,7 +93,6 @@ namespace GraphProb.DataModel
                     {
                         if (child.Color == 0)
                         {
-
                             thereIsLessThanTwoTriangle |= this.RecursiveTraversal(child, sum + testResult[i]);
                         }
                         else

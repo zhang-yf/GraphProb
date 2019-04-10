@@ -26,7 +26,7 @@ namespace GraphProb
             DateTime SecondStart = DateTime.Now;
             
             result = g.AllPossibleColor();
-
+            Console.WriteLine("Starting Second Algorithm ...");
             DateTime SecondResult = DateTime.Now;
             Console.WriteLine("Second Algorithm took " + (SecondResult - SecondStart).TotalMilliseconds + "ms, the result is: " + result.ToString());
 
