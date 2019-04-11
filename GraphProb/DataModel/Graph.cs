@@ -73,7 +73,7 @@ namespace GraphProb.DataModel
         /// 
         /// However, since this is a undirected graph with cycles, DFS performance is very bad (depends on the average degree d of nodes and n, bounded by (d^n)^3).
         /// </summary>
-        /// <param name="n"> the Root Node</param>
+        /// <param name="n"> the Root Node (arbitrary)</param>
         /// <param name="sum"> The acumulative sum at each internal tree node, usded for pruning.</param>
         /// <returns></returns>
         public bool RecursiveTraversal(Node n, int sum)
@@ -157,18 +157,18 @@ namespace GraphProb.DataModel
                 LinkedNode node = this.LinkedNodes.First();
                 int prevSum = sumOfColors;
 
-                int localNumOfTriangle = node.getSum();
+                int localNumOfTriangle = node.GetSum();
                 sumOfColors += this.IncrementColor(node);
-                numOfCompleteTriangle += (node.getSum() - localNumOfTriangle);
+                numOfCompleteTriangle += (node.GetSum() - localNumOfTriangle);
                 // similar to long addition, the increment carry over to next position.
                 while (prevSum > sumOfColors)
                 {
 
                     node = node.Next;
-                    localNumOfTriangle = node.getSum();
+                    localNumOfTriangle = node.GetSum();
                     prevSum = sumOfColors;
                     sumOfColors += this.IncrementColor(node);
-                    numOfCompleteTriangle += (node.getSum() - localNumOfTriangle);
+                    numOfCompleteTriangle += (node.GetSum() - localNumOfTriangle);
                 }
                 //count++;
                 if (numOfCompleteTriangle < 3)
@@ -200,8 +200,8 @@ namespace GraphProb.DataModel
         /// <summary>
         /// After Graph nodes has been established, generate all triangle faces.
         /// faces is identified by a unique 6 character string consists of ordered node id of its verticies.
-        /// This eliminates unique identifier helps prune repeat visits to faces.
-        /// Dictionary has built in hash function for query via key, so the seaching using this id is efficient.
+        /// This enforces identifiers are unique, helps prune repeat visits to faces.
+        /// Dictionary has built in hash function for query via key, so the seaching using this id is efficient. (even though we never search for a face in this program, it might be useful someday.)
         /// Also calculates MutibleChildren for each node, since it belongs to this pre processing step.
         /// </summary>
         private void GenerateTriangleAndMutibleChildren() {
@@ -258,7 +258,7 @@ namespace GraphProb.DataModel
         }
 
         /// <summary>
-        /// data driven, used only for Increment color
+        /// returns the index of the color in the color array.
         /// </summary>
         /// <param name="color"></param>
         /// <returns></returns>
@@ -290,7 +290,8 @@ namespace GraphProb.DataModel
         }
 
         /// <summary>
-        /// Calculates total number of complete 
+        /// Calculates total number of complete triangle in the entire graph
+        /// 
         /// only used once, but could be useful for future enhancement.
         /// </summary>
         /// <returns></returns>
@@ -307,6 +308,7 @@ namespace GraphProb.DataModel
         
         /// <summary>
         /// Reads a given string containing the whole graph.
+        /// 
         /// Format the graph as the example given in graph.txt
         /// </summary>
         /// <param name="content"></param>
